@@ -32,6 +32,7 @@ TARGET_2ND_CPU_VARIANT := kryo
 TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
 
 # Assertions
 TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3T,oneplus3t
