@@ -1,5 +1,6 @@
 # Inherit from qcom-common
 -include $(QCPATH)/common/msm8996/BoardConfigVendor.mk
+-include device/voxpopuli/sepolicy/sepolicy.mk
 
 TARGET_SPECIFIC_HEADER_PATH := device/oneplus/oneplus3/include
 
@@ -33,6 +34,9 @@ TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
+
+TARGET_POWERHAL_VARIANT := voxpopuli
+TARGET_USES_INTERACTION_BOOST := true
 
 # Assertions
 TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3T,oneplus3t
