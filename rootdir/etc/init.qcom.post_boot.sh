@@ -71,6 +71,14 @@ echo 59000 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresi
 echo 307200 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
 echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/ignore_hispeed_on_notif
 echo 1 > /sys/devices/system/cpu/cpu2/cpufreq/interactive/enable_prediction
+
+# EAS: Capping the max frequency of silver core to 1.6GHz
+echo 1593600 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+# if EAS is present, switch to schedutil governor (no effect if not EAS)
+echo "schedutil" /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo "schedutil" /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+
 # re-enable thermal and BCL hotplug
 echo 1 > /sys/module/msm_thermal/core_control/enabled
 echo -n disable > /sys/devices/soc/soc:qcom,bcl/mode
