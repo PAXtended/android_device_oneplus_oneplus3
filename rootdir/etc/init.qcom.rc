@@ -49,6 +49,9 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
+    # Create Power HAL tunables
+    mkdir /dev/voxpopuli 0555 system system
+
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
 
@@ -68,6 +71,38 @@ on early-boot
     exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
+    # Set Power HAL tunables
+    write /dev/voxpopuli/enable_interaction_boost   1
+    write /dev/voxpopuli/fling_min_boost_duration   200
+    write /dev/voxpopuli/fling_max_boost_duration   2500
+    write /dev/voxpopuli/fling_boost_topapp         10
+    write /dev/voxpopuli/fling_min_freq_big         1113
+    write /dev/voxpopuli/fling_min_freq_little      1113
+    write /dev/voxpopuli/touch_boost_duration       200
+    write /dev/voxpopuli/touch_boost_topapp         5
+    write /dev/voxpopuli/touch_min_freq_big         1036
+    write /dev/voxpopuli/touch_min_freq_little      1036
+    chmod 0644 /dev/voxpopuli/enable_interaction_boost
+    chmod 0644 /dev/voxpopuli/fling_min_boost_duration
+    chmod 0644 /dev/voxpopuli/fling_max_boost_duration
+    chmod 0644 /dev/voxpopuli/fling_boost_topapp
+    chmod 0644 /dev/voxpopuli/fling_min_freq_big
+    chmod 0644 /dev/voxpopuli/fling_min_freq_little
+    chmod 0644 /dev/voxpopuli/touch_boost_duration
+    chmod 0644 /dev/voxpopuli/touch_boost_topapp
+    chmod 0644 /dev/voxpopuli/touch_min_freq_big
+    chmod 0644 /dev/voxpopuli/touch_min_freq_little
+    chown system system /dev/voxpopuli/enable_interaction_boost
+    chown system system /dev/voxpopuli/fling_min_boost_duration
+    chown system system /dev/voxpopuli/fling_max_boost_duration
+    chown system system /dev/voxpopuli/fling_boost_topapp
+    chown system system /dev/voxpopuli/fling_min_freq_big
+    chown system system /dev/voxpopuli/fling_min_freq_little
+    chown system system /dev/voxpopuli/touch_boost_duration
+    chown system system /dev/voxpopuli/touch_boost_topapp
+    chown system system /dev/voxpopuli/touch_min_freq_big
+    chown system system /dev/voxpopuli/touch_min_freq_little
+
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
